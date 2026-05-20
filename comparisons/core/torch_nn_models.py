@@ -1100,7 +1100,7 @@ def _forward_policy(model, W: torch.Tensor, goal: float, step_idx: int, total_st
                     seq_feats.insert(0, seq_feats[0])
                 seq = torch.stack(seq_feats, dim=1)           # (B, seq_len, feat_dim)
             else:
-                seq = features.unsqueeze(1).expand(-1, seq_len, -1)
+                seq = features.unsqueeze(1).expand(-1, seq_len, -1).contiguous()
             return model(seq), None
         if kind == 'transformer':
             seq_len = model.seq_len
@@ -1123,7 +1123,7 @@ def _forward_policy(model, W: torch.Tensor, goal: float, step_idx: int, total_st
                     seq_feats.insert(0, seq_feats[0])
                 seq = torch.stack(seq_feats, dim=1)
             else:
-                seq = features.unsqueeze(1).expand(-1, seq_len, -1)
+                seq = features.unsqueeze(1).expand(-1, seq_len, -1).contiguous()
             return model(seq), None
         if kind == 'deep_bsde':
             return model.forward_step(features, step_idx), None
