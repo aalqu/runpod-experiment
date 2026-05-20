@@ -1,0 +1,198 @@
+
+============================================================
+  EXPERIMENT CONFIGURATION (legacy single-window)
+============================================================
+  n_assets       : [10]
+  seeds          : [1, 2, 3, 4, 5]
+  device         : cuda
+  resume         : True
+  compile        : False
+  FD grid        : Nw=120, Nt=80
+  NN iters       : 200
+  NN paths       : 512
+  NN pretrain    : 0
+  NN antithetic  : True
+  NN curriculum  : 30%
+  NN patience    : 60
+  Architectures  : ['nn_mlp_small', 'nn_mlp_deep', 'nn_policy_net', 'nn_ste_goalreach', 'nn_digital_hedge', 'nn_policy_long_only', 'nn_ste_long_only', 'nn_digital_hedge_long_only', 'nn_historical_replay', 'nn_historical_replay_long_only', 'deep_bsde', 'pinn', 'actor_critic', 'lstm', 'transformer', 'es_grpo', 'es_grpo_long_only']
+  Results → results/gpu2
+============================================================
+
+============================================================
+  n_assets = 10
+============================================================
+  [SPLIT] calib: 20150102→20201231 (1511 days)  eval: 20210104→20241231 (1005 days)
+  Tickers : [np.str_('IVV'), np.str_('QQQ'), np.str_('IWM'), np.str_('VEA'), np.str_('VNQ'), np.str_('TLT'), np.str_('IEF'), np.str_('LQD'), np.str_('GLD'), np.str_('XLK')]
+  Returns : ['13.7%', '21.7%', '12.1%', '8.2%', '7.4%', '7.1%', '3.9%', '5.7%', '8.5%', '23.3%']
+  Dates   : 20150102 → 20201231  (1511 days)
+  [FD n=10 goal=1.10] solving HJB ... done (79.3s)  goal_hit=True  mc_P(goal)=0.901
+  [Merton n=10 goal=1.10] ... done  goal_hit=True
+
+  seed=1
+    [nn_mlp_small goal=1.10] training ... done (200.7s)  goal_hit=True  mc_P(goal)=0.854  test_E[U]=0.8467
+    [nn_mlp_deep goal=1.10] training ... done (214.4s)  goal_hit=True  mc_P(goal)=0.886  test_E[U]=0.8835
+    [nn_policy_net goal=1.10] training ... done (216.6s)  goal_hit=True  mc_P(goal)=0.875  test_E[U]=0.8671
+    [nn_ste_goalreach goal=1.10] training ... done (216.4s)  goal_hit=True  mc_P(goal)=0.875  test_E[U]=0.8672
+    [nn_digital_hedge goal=1.10] training ... done (1355.6s)  goal_hit=True  mc_P(goal)=0.560  test_E[U]=0.5352
+    [nn_policy_long_only goal=1.10] training ... done (220.0s)  goal_hit=True  mc_P(goal)=0.693  test_E[U]=0.6614
+    [nn_ste_long_only goal=1.10] training ... done (216.3s)  goal_hit=True  mc_P(goal)=0.693  test_E[U]=0.6865
+    [nn_digital_hedge_long_only goal=1.10] training ... done (1025.0s)  goal_hit=True  mc_P(goal)=0.558  test_E[U]=0.5693
+    [nn_historical_replay goal=1.10] training ... done (246.6s)  goal_hit=True  mc_P(goal)=0.613  test_E[U]=1.0000
+    [nn_historical_replay_long_only goal=1.10] training ... done (245.2s)  goal_hit=True  mc_P(goal)=0.704  test_E[U]=1.0000
+    [deep_bsde goal=1.10] training ... done (225.6s)  goal_hit=True  mc_P(goal)=0.835  test_E[U]=0.8550
+    [pinn goal=1.10] training ... done (263.6s)  goal_hit=True  mc_P(goal)=0.873  test_E[U]=0.8567
+    [actor_critic goal=1.10] training ... done (255.5s)  goal_hit=True  mc_P(goal)=0.864  test_E[U]=0.8626
+    [lstm goal=1.10] training ... done (276.0s)  goal_hit=True  mc_P(goal)=0.785  test_E[U]=0.7899
+    [transformer goal=1.10] training ... done (462.2s)  goal_hit=True  mc_P(goal)=0.748  test_E[U]=0.6794
+    [es_grpo goal=1.10] training ... done (191.8s)  goal_hit=True  mc_P(goal)=0.782  test_E[U]=0.7910
+    [es_grpo_long_only goal=1.10] training ... done (194.9s)  goal_hit=True  mc_P(goal)=0.760  test_E[U]=0.7266
+
+  seed=2
+    [nn_mlp_small goal=1.10] training ... done (201.5s)  goal_hit=True  mc_P(goal)=0.805  test_E[U]=0.8008
+    [nn_mlp_deep goal=1.10] training ... done (215.8s)  goal_hit=True  mc_P(goal)=0.897  test_E[U]=0.8591
+    [nn_policy_net goal=1.10] training ... done (220.8s)  goal_hit=True  mc_P(goal)=0.902  test_E[U]=0.8720
+    [nn_ste_goalreach goal=1.10] training ... done (220.5s)  goal_hit=True  mc_P(goal)=0.902  test_E[U]=0.8691
+    [nn_digital_hedge goal=1.10] training ... done (1932.8s)  goal_hit=True  mc_P(goal)=0.622  test_E[U]=0.6470
+    [nn_policy_long_only goal=1.10] training ... done (215.5s)  goal_hit=True  mc_P(goal)=0.695  test_E[U]=0.6663
+    [nn_ste_long_only goal=1.10] training ... done (207.6s)  goal_hit=True  mc_P(goal)=0.695  test_E[U]=0.6982
+    [nn_digital_hedge_long_only goal=1.10] training ... done (1932.7s)  goal_hit=True  mc_P(goal)=0.560  test_E[U]=0.5894
+    [nn_historical_replay goal=1.10] training ... done (247.0s)  goal_hit=True  mc_P(goal)=0.614  test_E[U]=1.0000
+    [nn_historical_replay_long_only goal=1.10] training ... done (235.5s)  goal_hit=True  mc_P(goal)=0.711  test_E[U]=1.0000
+    [deep_bsde goal=1.10] training ... done (224.6s)  goal_hit=True  mc_P(goal)=0.797  test_E[U]=0.8721
+    [pinn goal=1.10] training ... done (283.6s)  goal_hit=True  mc_P(goal)=0.874  test_E[U]=0.8450
+    [actor_critic goal=1.10] training ... done (259.8s)  goal_hit=True  mc_P(goal)=0.869  test_E[U]=0.8327
+    [lstm goal=1.10] training ... done (286.1s)  goal_hit=True  mc_P(goal)=0.800  test_E[U]=0.7913
+    [transformer goal=1.10] training ... done (548.2s)  goal_hit=True  mc_P(goal)=0.914  test_E[U]=0.8891
+    [es_grpo goal=1.10] training ... done (192.3s)  goal_hit=True  mc_P(goal)=0.853  test_E[U]=0.8320
+    [es_grpo_long_only goal=1.10] training ... done (192.4s)  goal_hit=True  mc_P(goal)=0.779  test_E[U]=0.6963
+
+  seed=3
+    [nn_mlp_small goal=1.10] training ... done (200.4s)  goal_hit=True  mc_P(goal)=0.873  test_E[U]=0.8545
+    [nn_mlp_deep goal=1.10] training ... done (219.5s)  goal_hit=True  mc_P(goal)=0.889  test_E[U]=0.8787
+    [nn_policy_net goal=1.10] training ... done (213.1s)  goal_hit=True  mc_P(goal)=0.891  test_E[U]=0.8708
+    [nn_ste_goalreach goal=1.10] training ... done (215.9s)  goal_hit=True  mc_P(goal)=0.891  test_E[U]=0.8711
+    [nn_digital_hedge goal=1.10] training ... done (1897.1s)  goal_hit=True  mc_P(goal)=0.659  test_E[U]=0.6460
+    [nn_policy_long_only goal=1.10] training ... done (220.2s)  goal_hit=True  mc_P(goal)=0.694  test_E[U]=0.6901
+    [nn_ste_long_only goal=1.10] training ... done (204.6s)  goal_hit=True  mc_P(goal)=0.694  test_E[U]=0.7090
+    [nn_digital_hedge_long_only goal=1.10] training ... done (1921.7s)  goal_hit=False  mc_P(goal)=0.615  test_E[U]=0.5771
+    [nn_historical_replay goal=1.10] training ... done (245.5s)  goal_hit=True  mc_P(goal)=0.790  test_E[U]=1.0000
+    [nn_historical_replay_long_only goal=1.10] training ... done (235.5s)  goal_hit=True  mc_P(goal)=0.701  test_E[U]=1.0000
+    [deep_bsde goal=1.10] training ... done (202.6s)  goal_hit=True  mc_P(goal)=0.723  test_E[U]=0.6955
+    [pinn goal=1.10] training ... done (272.3s)  goal_hit=True  mc_P(goal)=0.864  test_E[U]=0.8453
+    [actor_critic goal=1.10] training ... done (253.8s)  goal_hit=True  mc_P(goal)=0.882  test_E[U]=0.8674
+    [lstm goal=1.10] training ... done (281.6s)  goal_hit=True  mc_P(goal)=0.850  test_E[U]=0.8221
+    [transformer goal=1.10] training ... done (481.1s)  goal_hit=True  mc_P(goal)=0.812  test_E[U]=0.7318
+    [es_grpo goal=1.10] training ... done (183.8s)  goal_hit=True  mc_P(goal)=0.781  test_E[U]=0.7969
+    [es_grpo_long_only goal=1.10] training ... done (188.2s)  goal_hit=True  mc_P(goal)=0.739  test_E[U]=0.6777
+
+  seed=4
+    [nn_mlp_small goal=1.10] training ... done (195.9s)  goal_hit=True  mc_P(goal)=0.863  test_E[U]=0.8617
+    [nn_mlp_deep goal=1.10] training ... done (213.0s)  goal_hit=True  mc_P(goal)=0.890  test_E[U]=0.8834
+    [nn_policy_net goal=1.10] training ... done (216.4s)  goal_hit=True  mc_P(goal)=0.881  test_E[U]=0.8734
+    [nn_ste_goalreach goal=1.10] training ... done (216.0s)  goal_hit=True  mc_P(goal)=0.746  test_E[U]=0.7598
+    [nn_digital_hedge goal=1.10] training ... done (1870.0s)  goal_hit=True  mc_P(goal)=0.564  test_E[U]=0.5688
+    [nn_policy_long_only goal=1.10] training ... done (220.4s)  goal_hit=True  mc_P(goal)=0.697  test_E[U]=0.6915
+    [nn_ste_long_only goal=1.10] training ... done (214.8s)  goal_hit=True  mc_P(goal)=0.697  test_E[U]=0.7041
+    [nn_digital_hedge_long_only goal=1.10] training ... done (1882.2s)  goal_hit=False  mc_P(goal)=0.597  test_E[U]=0.5737
+    [nn_historical_replay goal=1.10] training ... done (244.4s)  goal_hit=True  mc_P(goal)=0.602  test_E[U]=1.0000
+    [nn_historical_replay_long_only goal=1.10] training ... done (241.4s)  goal_hit=True  mc_P(goal)=0.697  test_E[U]=1.0000
+    [deep_bsde goal=1.10] training ... done (228.1s)  goal_hit=True  mc_P(goal)=0.771  test_E[U]=0.8701
+    [pinn goal=1.10] training ... done (278.8s)  goal_hit=True  mc_P(goal)=0.870  test_E[U]=0.8704
+    [actor_critic goal=1.10] training ... done (264.4s)  goal_hit=True  mc_P(goal)=0.874  test_E[U]=0.8669
+    [lstm goal=1.10] training ... done (279.8s)  goal_hit=True  mc_P(goal)=0.766  test_E[U]=0.7483
+    [transformer goal=1.10] training ... done (498.3s)  goal_hit=True  mc_P(goal)=0.831  test_E[U]=0.7527
+    [es_grpo goal=1.10] training ... done (194.2s)  goal_hit=True  mc_P(goal)=0.794  test_E[U]=0.7939
+    [es_grpo_long_only goal=1.10] training ... done (197.1s)  goal_hit=True  mc_P(goal)=0.741  test_E[U]=0.7051
+
+  seed=5
+    [nn_mlp_small goal=1.10] training ... done (204.1s)  goal_hit=True  mc_P(goal)=0.870  test_E[U]=0.8472
+    [nn_mlp_deep goal=1.10] training ... done (224.3s)  goal_hit=True  mc_P(goal)=0.880  test_E[U]=0.8621
+    [nn_policy_net goal=1.10] training ... done (220.3s)  goal_hit=True  mc_P(goal)=0.903  test_E[U]=0.8774
+    [nn_ste_goalreach goal=1.10] training ... done (219.2s)  goal_hit=True  mc_P(goal)=0.903  test_E[U]=0.8779
+    [nn_digital_hedge goal=1.10] training ... done (1848.8s)  goal_hit=True  mc_P(goal)=0.385  test_E[U]=0.4087
+    [nn_policy_long_only goal=1.10] training ... done (219.0s)  goal_hit=True  mc_P(goal)=0.680  test_E[U]=0.6929
+    [nn_ste_long_only goal=1.10] training ... done (224.1s)  goal_hit=True  mc_P(goal)=0.680  test_E[U]=0.6992
+    [nn_digital_hedge_long_only goal=1.10] training ... done (1853.5s)  goal_hit=True  mc_P(goal)=0.518  test_E[U]=0.5347
+    [nn_historical_replay goal=1.10] training ... done (237.6s)  goal_hit=True  mc_P(goal)=0.612  test_E[U]=1.0000
+    [nn_historical_replay_long_only goal=1.10] training ... done (241.4s)  goal_hit=True  mc_P(goal)=0.697  test_E[U]=1.0000
+    [deep_bsde goal=1.10] training ... done (206.6s)  goal_hit=True  mc_P(goal)=0.740  test_E[U]=0.7082
+    [pinn goal=1.10] training ... done (277.7s)  goal_hit=True  mc_P(goal)=0.883  test_E[U]=0.8595
+    [actor_critic goal=1.10] training ... done (257.9s)  goal_hit=True  mc_P(goal)=0.856  test_E[U]=0.8405
+    [lstm goal=1.10] training ... done (286.5s)  goal_hit=True  mc_P(goal)=0.790  test_E[U]=0.7786
+    [transformer goal=1.10] training ... done (489.1s)  goal_hit=True  mc_P(goal)=0.754  test_E[U]=0.6995
+    [es_grpo goal=1.10] training ... done (187.7s)  goal_hit=True  mc_P(goal)=0.767  test_E[U]=0.7510
+    [es_grpo_long_only goal=1.10] training ... done (192.5s)  goal_hit=True  mc_P(goal)=0.740  test_E[U]=0.6826
+
+Total run time: 36006.3s
+
+Summary table → results/gpu2/summary.csv
+
+Computing Table 2 (value-function errors, n=1 only) ...
+  (skipped — no n=1 NN runs with model artifacts)
+
+Computing effect-size table (Δ vs fd_nd) ...
+  Effect sizes skipped: index must be a MultiIndex to unstack, <class 'pandas.Index'> was passed
+
+============================================================
+  MC GOAL PROBABILITY (mean across seeds)
+============================================================
+n_assets                          10
+method                              
+fd_nd                          90.1%
+nn_policy_net                  89.0%
+nn_mlp_deep                    88.9%
+pinn                           87.3%
+actor_critic                   86.9%
+nn_ste_goalreach               86.3%
+nn_mlp_small                   85.3%
+transformer                    81.2%
+lstm                           79.8%
+es_grpo                        79.5%
+deep_bsde                      77.3%
+es_grpo_long_only              75.2%
+nn_historical_replay_long_only 70.2%
+nn_policy_long_only            69.2%
+nn_ste_long_only               69.2%
+nn_historical_replay           64.6%
+nn_digital_hedge_long_only     57.0%
+nn_digital_hedge               55.8%
+fd_merton_multi                  NaN
+
+============================================================
+  TRAINING TIME (seconds)
+============================================================
+                                train_time_sec  solve_time_sec  total_sec
+method                                                                   
+pinn                                 58.075062        0.000000  58.075062
+transformer                          56.735551        0.000000  56.735551
+deep_bsde                            28.467831        0.000000  28.467831
+lstm                                 21.020102        0.000000  21.020102
+actor_critic                         20.071819        0.000000  20.071819
+nn_mlp_deep                          17.025663        0.000000  17.025663
+nn_policy_net                        17.019899        0.000000  17.019899
+nn_policy_long_only                  16.730983        0.000000  16.730983
+nn_mlp_small                         16.023939        0.000000  16.023939
+nn_ste_goalreach                     15.309606        0.000000  15.309606
+nn_digital_hedge                     13.168501        0.000000  13.168501
+nn_digital_hedge_long_only           11.674118        0.000000  11.674118
+nn_ste_long_only                     10.312478        0.000000  10.312478
+es_grpo_long_only                     8.348548        0.000000   8.348548
+nn_historical_replay_long_only        7.446887        0.000000   7.446887
+nn_historical_replay                  7.300086        0.000000   7.300086
+es_grpo                               5.839574        0.000000   5.839574
+fd_nd                                 0.000000        2.283113   2.283113
+fd_merton_multi                       0.000000        0.000121   0.000121
+
+Generating plots ...
+  → results/gpu2/goal_probability.png
+  → results/gpu2/terminal_wealth.png
+  → results/gpu2/train_time.png
+  → results/gpu2/goal_vs_leverage.png
+  → results/gpu2/tractability.png
+  → results/gpu2/training_curves/ (17 curve files)
+  → results/gpu2/weights_vs_wealth/
+  → results/gpu2/weights/
+  → results/gpu2/weight_dist/
+
+All outputs saved to: results/gpu2
+Done.
