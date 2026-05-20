@@ -391,37 +391,34 @@ def _gbm_mc_eval(policy_fn, market_data, initial_wealth, target_multiplier,
     L_chol = np.linalg.cholesky(omega + 1e-10 * np.eye(n))
     rng    = np.random.default_rng(seed)
 
-    terminal_wealth = np.empty(n_mc)
-    goal_hit        = np.empty(n_mc, dtype=bool)
-    all_weights     = np.empty((n_mc, days, n))
+    all_weights = np.empty((n_mc, days, n))
 
     Z_all = rng.standard_normal((n_mc, days, n))
     log_ret_mat = ((mu - 0.5 * np.diag(omega)) * dt
                    + (Z_all @ L_chol.T) * np.sqrt(dt))   # (n_mc, days, n)
 
     r_daily = r * dt
-    for i in range(n_mc):
-        W = float(initial_wealth)
-        for t in range(days):
-            tau  = (days - t) * dt          # time-to-horizon
-            w_norm = W / goal
-            pi   = np.asarray(policy_fn(w_norm, tau), dtype=float).ravel()
-            all_weights[i, t] = pi
-            gross = np.exp(log_ret_mat[i, t]) - 1.0
-            excess = float(np.dot(pi, gross - r_daily))
-            W = max(W * (1.0 + r_daily + excess), 1e-6)
-        terminal_wealth[i] = W
-        goal_hit[i]        = W >= goal
+    W_batch = np.full(n_mc, float(initial_wealth))        # (n_mc,)
+    for t in range(days):
+        tau    = (days - t) * dt                          # scalar, same for all paths
+        w_norm = W_batch / goal                           # (n_mc,)
+        pi     = np.asarray(policy_fn(w_norm, tau), dtype=float)
+        pi     = pi.reshape(n_mc, n)                      # (n_mc, n)
+        all_weights[:, t, :] = pi
+        gross  = np.exp(log_ret_mat[:, t, :]) - 1.0      # (n_mc, n)
+        excess = (pi * (gross - r_daily)).sum(axis=1)     # (n_mc,)
+        W_batch = np.maximum(W_batch * (1.0 + r_daily + excess), 1e-6)
+
+    terminal_wealth = W_batch
+    goal_hit        = W_batch >= goal
 
     shortfall  = np.maximum(goal - terminal_wealth, 0.0)
     pct        = np.percentile(terminal_wealth, [5, 25, 50, 75, 95])
     gross_lev  = np.abs(all_weights).sum(axis=2)  # (n_mc, days)
 
-    # Bootstrap 95% CI on goal probability
-    boot_probs = np.array([
-        rng.choice(goal_hit, size=len(goal_hit), replace=True).mean()
-        for _ in range(500)
-    ])
+    # Bootstrap 95% CI on goal probability — vectorised over 500 resamples
+    boot_idx   = rng.integers(0, n_mc, size=(500, n_mc))
+    boot_probs = goal_hit[boot_idx].mean(axis=1)
 
     return {
         "mc_goal_prob":           float(goal_hit.mean()),
@@ -474,18 +471,20 @@ def _extract_policy_fn(result, market_data, config):
             total_steps = 252   # backtest horizon in days
 
             def nn_policy(w_norm, tau):
-                W = float(w_norm) * goal_val
+                w_arr    = np.atleast_1d(np.asarray(w_norm, dtype=float))
+                scalar   = np.ndim(w_norm) == 0
                 step_idx = max(0, int(round(total_steps * (1.0 - tau))))
                 weights  = np.asarray(
-                    torch_pw(net, W, goal_val,
+                    torch_pw(net, w_arr * goal_val, goal_val,
                              step_idx=step_idx,
                              total_steps=total_steps),
                     dtype=float)
                 from comparisons.core.evaluation import apply_leverage_constraint
-                return apply_leverage_constraint(
-                    weights.ravel(), config.weight_lower_bound,
+                result = apply_leverage_constraint(
+                    np.atleast_2d(weights), config.weight_lower_bound,
                     config.weight_upper_bound,
                     config.max_long_leverage, config.max_short_leverage)
+                return result[0] if scalar else result
             return nn_policy
         except Exception:
             return None
